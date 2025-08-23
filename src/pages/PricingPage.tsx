@@ -34,6 +34,34 @@ const optionsData = {
   ]
 };
 
+// Mock data for digital options
+const digitalOptionsData = {
+  calls: [
+    { bid: 0.659, ask: 0.673, strike: 5700, last: 0.665 },
+    { bid: 0.640, ask: 0.655, strike: 5600, last: 0.648 },
+    { bid: 0.623, ask: 0.638, strike: 5500, last: 0.630 },
+    { bid: 0.605, ask: 0.620, strike: 5400, last: 0.612 },
+    { bid: 0.588, ask: 0.603, strike: 5300, last: 0.595 },
+    { bid: 0.571, ask: 0.586, strike: 5200, last: 0.578 },
+    { bid: 0.554, ask: 0.569, strike: 5100, last: 0.561 },
+    { bid: 0.537, ask: 0.552, strike: 5000, last: 0.544 },
+    { bid: 0.520, ask: 0.535, strike: 4900, last: 0.527 },
+    { bid: 0.503, ask: 0.518, strike: 4800, last: 0.510 },
+  ],
+  puts: [
+    { bid: 0.341, ask: 0.356, strike: 5700, last: 0.348 },
+    { bid: 0.358, ask: 0.373, strike: 5600, last: 0.365 },
+    { bid: 0.375, ask: 0.390, strike: 5500, last: 0.382 },
+    { bid: 0.392, ask: 0.407, strike: 5400, last: 0.399 },
+    { bid: 0.409, ask: 0.424, strike: 5300, last: 0.416 },
+    { bid: 0.426, ask: 0.441, strike: 5200, last: 0.433 },
+    { bid: 0.443, ask: 0.458, strike: 5100, last: 0.450 },
+    { bid: 0.460, ask: 0.475, strike: 5000, last: 0.467 },
+    { bid: 0.477, ask: 0.492, strike: 4900, last: 0.484 },
+    { bid: 0.494, ask: 0.509, strike: 4800, last: 0.501 },
+  ]
+};
+
 const forwardsData = [
   { expiry: "28Mar25", bid: 4296.0, ask: 4321.0, lastPrice: 4308.50 },
   { expiry: "25Apr25", bid: 4289.5, ask: 4315.3, lastPrice: 4302.40 },
@@ -175,6 +203,67 @@ const PricingPage = ({ onBack }: PricingPageProps) => {
                       <TableCell className="text-sm">{formatNumber(option.last)}</TableCell>
                       <TableCell className="text-sm text-muted-foreground">{option.volume.toLocaleString()}</TableCell>
                       <TableCell className="text-sm perf-negative">{formatDelta(option.delta)}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Digital Options Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          {/* Digital Calls */}
+          <Card className="pro-card">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg text-success">Digital Options - Calls</CardTitle>
+            </CardHeader>
+            <CardContent className="p-0">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="text-xs">Bid</TableHead>
+                    <TableHead className="text-xs">Ask</TableHead>
+                    <TableHead className="text-xs">Strike</TableHead>
+                    <TableHead className="text-xs">Last</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {digitalOptionsData.calls.map((option, index) => (
+                    <TableRow key={index} className="border-border/50">
+                      <TableCell className="text-sm perf-positive">{option.bid.toFixed(3)}</TableCell>
+                      <TableCell className="text-sm perf-negative">{option.ask.toFixed(3)}</TableCell>
+                      <TableCell className="text-sm font-medium">{option.strike}</TableCell>
+                      <TableCell className="text-sm">{option.last.toFixed(3)}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+
+          {/* Digital Puts */}
+          <Card className="pro-card">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-lg text-destructive">Digital Options - Puts</CardTitle>
+            </CardHeader>
+            <CardContent className="p-0">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="text-xs">Bid</TableHead>
+                    <TableHead className="text-xs">Ask</TableHead>
+                    <TableHead className="text-xs">Strike</TableHead>
+                    <TableHead className="text-xs">Last</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {digitalOptionsData.puts.map((option, index) => (
+                    <TableRow key={index} className="border-border/50">
+                      <TableCell className="text-sm perf-positive">{option.bid.toFixed(3)}</TableCell>
+                      <TableCell className="text-sm perf-negative">{option.ask.toFixed(3)}</TableCell>
+                      <TableCell className="text-sm font-medium">{option.strike}</TableCell>
+                      <TableCell className="text-sm">{option.last.toFixed(3)}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
