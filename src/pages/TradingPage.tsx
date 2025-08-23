@@ -62,7 +62,7 @@ export default function TradingPage({ onBack }: TradingPageProps) {
               </div>
               <div className="flex items-center space-x-6 text-sm">
                 <span className="text-primary font-medium cursor-pointer">Trading</span>
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer">Pricing</span>
+                <span className="text-muted-foreground hover:text-foreground cursor-pointer" onClick={() => window.history.back()}>Pricing</span>
                 <span className="text-muted-foreground hover:text-foreground cursor-pointer">Dashboard</span>
                 <span className="text-muted-foreground hover:text-foreground cursor-pointer">Analytics</span>
                 <span className="text-muted-foreground hover:text-foreground cursor-pointer">Staking</span>

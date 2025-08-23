@@ -35,6 +35,7 @@ interface AgentBuilderHubProps {
   onStaking: () => void;
   onAnalytics?: () => void;
   onTrading?: () => void;
+  onPricing?: () => void;
 }
 
 // Mock performance data
@@ -141,7 +142,8 @@ export default function AgentBuilderHub({
   onExploreAgents,
   onStaking,
   onAnalytics,
-  onTrading 
+  onTrading,
+  onPricing
 }: AgentBuilderHubProps) {
   const [selectedAgent, setSelectedAgent] = useState<typeof agents[0] | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -170,7 +172,7 @@ export default function AgentBuilderHub({
               </div>
               <div className="flex items-center space-x-6 text-sm">
                 <span className="text-muted-foreground hover:text-foreground cursor-pointer" onClick={onTrading}>Trading</span>
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer">Pricing</span>
+                <span className="text-muted-foreground hover:text-foreground cursor-pointer" onClick={onPricing}>Pricing</span>
                 <span className="text-muted-foreground hover:text-foreground cursor-pointer">Dashboard</span>
                 <span className="text-muted-foreground hover:text-foreground cursor-pointer" onClick={onAnalytics}>Analytics</span>
                 <span className="text-muted-foreground hover:text-foreground cursor-pointer" onClick={onStaking}>Staking</span>
