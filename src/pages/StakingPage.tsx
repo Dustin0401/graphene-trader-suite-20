@@ -186,30 +186,6 @@ export default function StakingPage({ onBack }: StakingPageProps) {
           </Card>
         </div>
 
-        {/* Rewards Chart */}
-        <Card className="bg-background border-border mb-8">
-          <CardHeader>
-            <CardTitle className="text-foreground">Rewards History</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="h-64">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={rewardsData}>
-                  <XAxis dataKey="time" hide />
-                  <YAxis hide />
-                  <Line 
-                    type="monotone" 
-                    dataKey="rewards" 
-                    stroke="#BFFF00" 
-                    strokeWidth={2}
-                    dot={false}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </CardContent>
-        </Card>
-
         {/* Staking Pools */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Pool Selection */}
@@ -365,6 +341,30 @@ export default function StakingPage({ onBack }: StakingPageProps) {
             )}
           </div>
         </div>
+
+        {/* Rewards Chart */}
+        <Card className="bg-background border-border mb-8">
+          <CardHeader>
+            <CardTitle className="text-foreground">Rewards History</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={rewardsData}>
+                  <XAxis dataKey="time" hide />
+                  <YAxis hide />
+                  <Line 
+                    type="monotone" 
+                    dataKey="rewards" 
+                    stroke="#BFFF00" 
+                    strokeWidth={2}
+                    dot={false}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
