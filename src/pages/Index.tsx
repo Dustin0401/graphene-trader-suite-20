@@ -7,8 +7,9 @@ import StakingPage from "@/pages/StakingPage";
 import AnalyticsPage from "@/pages/AnalyticsPage";
 import TradingPage from "@/pages/TradingPage";
 import PricingPage from "@/pages/PricingPage";
+import DashboardPage from "@/pages/DashboardPage";
 
-type AppState = "homepage" | "connect" | "hub" | "builder" | "staking" | "analytics" | "trading" | "pricing";
+type AppState = "homepage" | "connect" | "hub" | "builder" | "staking" | "analytics" | "trading" | "pricing" | "dashboard";
 
 const Index = () => {
   const [appState, setAppState] = useState<AppState>("homepage");
@@ -56,6 +57,10 @@ const Index = () => {
     setAppState("pricing");
   };
 
+  const handleDashboard = () => {
+    setAppState("dashboard");
+  };
+
   if (appState === "homepage") {
     return (
       <Homepage 
@@ -90,6 +95,10 @@ const Index = () => {
     return <PricingPage onBack={handleBackToHub} />;
   }
 
+  if (appState === "dashboard") {
+    return <DashboardPage onBack={handleBackToHub} />;
+  }
+
   return (
     <AgentBuilderHub 
       walletConnected={connectedWallet}
@@ -99,6 +108,7 @@ const Index = () => {
       onAnalytics={handleAnalytics}
       onTrading={handleTrading}
       onPricing={handlePricing}
+      onDashboard={handleDashboard}
     />
   );
 };
