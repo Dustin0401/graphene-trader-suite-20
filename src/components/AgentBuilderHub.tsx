@@ -182,7 +182,7 @@ export default function AgentBuilderHub({
                 <span className="text-primary font-medium cursor-pointer">AI Agents</span>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-6">
               <Button onClick={onCreateAgent} className="bg-primary hover:bg-primary/90 text-primary-foreground text-sm px-4 py-2">
                 <Plus className="h-4 w-4 mr-2" />
                 Create Agent
