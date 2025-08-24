@@ -27,6 +27,7 @@ import AgentCard from "@/components/AgentCard";
 import AgentDetailedList from "@/components/AgentDetailedList";
 import AgentDetailPage from "@/components/AgentDetailPage";
 import { Input } from "@/components/ui/input";
+import ProfileAvatar from "@/components/ProfileAvatar";
 
 interface AgentBuilderHubProps {
   walletConnected: string;
@@ -170,7 +171,7 @@ export default function AgentBuilderHub({
                 <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
                   <Bot className="h-5 w-5 text-primary-foreground" />
                 </div>
-                <span className="text-foreground font-semibold">STRATOS</span>
+                <span className="text-foreground font-semibold">Graphene Protocol</span>
               </div>
               <div className="flex items-center space-x-6 text-sm">
                 <span className="text-muted-foreground hover:text-foreground cursor-pointer" onClick={onTrading}>Trading</span>
@@ -186,7 +187,7 @@ export default function AgentBuilderHub({
                 <Plus className="h-4 w-4 mr-2" />
                 Create Agent
               </Button>
-              <div className="w-8 h-8 rounded-full bg-muted"></div>
+              <ProfileAvatar walletAddress={walletConnected} />
             </div>
           </div>
         </div>

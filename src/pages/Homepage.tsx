@@ -219,7 +219,7 @@ export default function Homepage({ onEnterApp, onWalletConnect, connectedWallet 
                   <Bot className="h-6 w-6 text-primary-foreground" />
                 </div>
                 <div>
-                  <div className="text-xl font-bold text-foreground">STRATOS</div>
+                  <div className="text-xl font-bold text-foreground">Graphene Protocol</div>
                   <div className="text-xs text-muted-foreground">Web3 AI Trading</div>
                 </div>
               </div>
