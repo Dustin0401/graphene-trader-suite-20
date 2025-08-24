@@ -69,164 +69,254 @@ export default function AgentBuilder({ onBack }: AgentBuilderProps) {
   };
 
   return (
-    <div className="min-h-screen bg-background lattice-bg">
-      {/* Header */}
-      <header className="glass-card border-b border-border/50 px-6 py-4">
-        <div className="flex items-center gap-4">
-          <Button variant="ghost" onClick={onBack}>
-            <ArrowLeft className="h-4 w-4" />
-          </Button>
-          <div className="flex items-center gap-2">
-            <Bot className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">Agent Builder</span>
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
+      {/* Enhanced Header */}
+      <header className="relative overflow-hidden bg-gradient-to-r from-background via-background to-background/80 border-b border-border/30 backdrop-blur-xl">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-accent/5" />
+        <div className="relative px-6 py-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-6">
+              <Button variant="ghost" onClick={onBack} className="hover:bg-primary/10 transition-all duration-300">
+                <ArrowLeft className="h-5 w-5" />
+              </Button>
+              <div className="flex items-center gap-3">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-lg blur opacity-30 animate-pulse" />
+                  <div className="relative bg-gradient-to-r from-primary to-accent p-2 rounded-lg">
+                    <Bot className="h-6 w-6 text-white" />
+                  </div>
+                </div>
+                <div>
+                  <h1 className="text-2xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                    Agent Builder
+                  </h1>
+                  <p className="text-xs text-muted-foreground">Powered by Graphene AI</p>
+                </div>
+              </div>
+            </div>
+            <Badge variant="outline" className="animate-pulse border-primary/30 text-primary bg-primary/5">
+              <div className="w-2 h-2 bg-primary rounded-full mr-2 animate-ping" />
+              AI Assistant Active
+            </Badge>
           </div>
-          <Badge variant="outline" className="animate-glow-pulse">
-            Builder AI Active
-          </Badge>
         </div>
       </header>
 
-      <div className="max-w-6xl mx-auto px-6 py-8">
-        {/* Mode Selector */}
-        <div className="flex items-center justify-center mb-8">
-          <div className="flex items-center gap-2 glass-card p-1">
-            <Button
-              variant={buildMode === "chat" ? "default" : "ghost"}
-              size="sm"
-              onClick={() => setBuildMode("chat")}
-            >
-              <MessageSquare className="h-4 w-4" />
-              Chat Builder
-            </Button>
-            <Button
-              variant={buildMode === "advanced" ? "default" : "ghost"}
-              size="sm"
-              onClick={() => setBuildMode("advanced")}
-            >
-              <Code className="h-4 w-4" />
-              Advanced Editor
-            </Button>
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        {/* Enhanced Mode Selector */}
+        <div className="flex items-center justify-center mb-12">
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-xl blur" />
+            <div className="relative flex items-center gap-1 bg-background/80 backdrop-blur-xl border border-border/30 rounded-xl p-2 shadow-lg">
+              <Button
+                variant={buildMode === "chat" ? "default" : "ghost"}
+                size="lg"
+                onClick={() => setBuildMode("chat")}
+                className={`relative transition-all duration-300 ${
+                  buildMode === "chat" 
+                    ? "bg-gradient-to-r from-primary to-accent text-white shadow-lg" 
+                    : "hover:bg-primary/10"
+                }`}
+              >
+                <MessageSquare className="h-5 w-5 mr-2" />
+                Chat Builder
+                {buildMode === "chat" && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-md opacity-20 animate-pulse" />
+                )}
+              </Button>
+              <Button
+                variant={buildMode === "advanced" ? "default" : "ghost"}
+                size="lg"
+                onClick={() => setBuildMode("advanced")}
+                className={`relative transition-all duration-300 ${
+                  buildMode === "advanced" 
+                    ? "bg-gradient-to-r from-primary to-accent text-white shadow-lg" 
+                    : "hover:bg-primary/10"
+                }`}
+              >
+                <Code className="h-5 w-5 mr-2" />
+                Advanced Editor
+                {buildMode === "advanced" && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-md opacity-20 animate-pulse" />
+                )}
+              </Button>
+            </div>
           </div>
         </div>
 
         {buildMode === "chat" ? (
-          /* Chat Builder Mode */
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Chat Interface */}
-            <Card className="glass-card p-6">
-              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                <Brain className="h-5 w-5 text-primary" />
-                Describe Your Trading Goal
-              </h2>
-              
-              <div className="space-y-4 mb-6 h-64 overflow-y-auto">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-gradient-primary flex items-center justify-center">
-                    <Bot className="h-4 w-4 text-primary-foreground" />
+          /* Enhanced Chat Builder Mode */
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+            {/* Enhanced Chat Interface */}
+            <div className="relative">
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 rounded-2xl blur opacity-30" />
+              <Card className="relative bg-background/80 backdrop-blur-xl border border-border/30 p-8 rounded-2xl shadow-2xl">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-lg blur opacity-50" />
+                    <Brain className="relative h-6 w-6 text-primary" />
                   </div>
-                  <div className="glass-card p-3 flex-1">
-                    <p className="text-sm">
-                      Hi! I'm your AI Agent Builder. Tell me what trading strategy you'd like to implement. 
-                      For example: "Create a delta-neutral strategy that trades ETH/USDC on Uniswap with low risk"
-                    </p>
+                  <div>
+                    <h2 className="text-xl font-bold">Describe Your Trading Vision</h2>
+                    <p className="text-sm text-muted-foreground">Let AI understand your strategy</p>
                   </div>
                 </div>
                 
-                {agentConfig.name && (
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center">
-                      <Bot className="h-4 w-4 text-secondary-foreground" />
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent rounded-xl" />
+                  <div className="relative space-y-6 mb-8 h-80 overflow-y-auto p-4 bg-muted/5 rounded-xl border border-border/20">
+                    <div className="flex items-start gap-4 animate-fade-in">
+                      <div className="relative flex-shrink-0">
+                        <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-full blur opacity-50" />
+                        <div className="relative w-10 h-10 rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center">
+                          <Bot className="h-5 w-5 text-white" />
+                        </div>
+                      </div>
+                      <div className="bg-background/80 backdrop-blur-sm border border-border/30 rounded-2xl rounded-tl-sm p-4 flex-1 shadow-sm">
+                        <p className="text-sm leading-relaxed">
+                          🚀 Welcome to the future of trading! I'm your AI Agent Builder. 
+                          <br /><br />
+                          Tell me about your trading goals and I'll create a sophisticated agent for you. 
+                          <br /><br />
+                          Try something like: <em>"Create a delta-neutral strategy that trades ETH/USDC on Uniswap with conservative risk management"</em>
+                        </p>
+                      </div>
                     </div>
-                    <div className="glass-card p-3 flex-1">
-                      <p className="text-sm">
-                        Great! I've created an agent configuration based on your input. 
-                        Check the preview on the right and let me know if you'd like any adjustments.
-                      </p>
-                    </div>
+                    
+                    {agentConfig.name && (
+                      <div className="flex items-start gap-4 animate-fade-in">
+                        <div className="relative flex-shrink-0">
+                          <div className="absolute inset-0 bg-gradient-to-r from-accent to-primary rounded-full blur opacity-50" />
+                          <div className="relative w-10 h-10 rounded-full bg-gradient-to-r from-accent to-primary flex items-center justify-center">
+                            <Bot className="h-5 w-5 text-white" />
+                          </div>
+                        </div>
+                        <div className="bg-background/80 backdrop-blur-sm border border-border/30 rounded-2xl rounded-tl-sm p-4 flex-1 shadow-sm">
+                          <p className="text-sm leading-relaxed">
+                            ✨ Perfect! I've analyzed your requirements and created a tailored agent configuration. 
+                            <br /><br />
+                            Check out the preview on the right side - you can see all the details I've configured for you. 
+                            Want to make any adjustments? Just let me know!
+                          </p>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
+                </div>
 
-              <div className="flex gap-2">
-                <Input
-                  placeholder="Describe your trading strategy..."
-                  value={chatInput}
-                  onChange={(e) => setChatInput(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleChatSubmit()}
-                  className="flex-1"
-                />
-                <Button onClick={handleChatSubmit} disabled={!chatInput.trim()}>
-                  <Zap className="h-4 w-4" />
-                </Button>
-              </div>
-            </Card>
-
-            {/* Live Preview */}
-            <Card className="glass-card p-6">
-              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                <Settings className="h-5 w-5 text-primary" />
-                Agent Configuration
-              </h2>
-
-              {agentConfig.name ? (
-                <div className="space-y-4">
-                  <div>
-                    <Label className="text-sm text-muted-foreground">Agent Name</Label>
-                    <p className="font-medium">{agentConfig.name}</p>
-                  </div>
-                  
-                  <div>
-                    <Label className="text-sm text-muted-foreground">Description</Label>
-                    <p className="text-sm">{agentConfig.description}</p>
-                  </div>
-
-                  <div>
-                    <Label className="text-sm text-muted-foreground">Strategy</Label>
-                    <Badge variant="outline" className="mt-1">
-                      {strategies.find(s => s.id === agentConfig.strategy)?.name}
-                    </Badge>
-                  </div>
-
-                  <div>
-                    <Label className="text-sm text-muted-foreground">Risk Level</Label>
-                    <Badge 
-                      className={`mt-1 ${
-                        agentConfig.riskLevel === 'low' ? 'status-success' : 
-                        agentConfig.riskLevel === 'medium' ? 'status-warning' : 'status-danger'
-                      }`}
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 rounded-xl blur" />
+                  <div className="relative flex gap-3 p-1 bg-background/50 rounded-xl border border-border/30">
+                    <Input
+                      placeholder="✨ Describe your ideal trading strategy..."
+                      value={chatInput}
+                      onChange={(e) => setChatInput(e.target.value)}
+                      onKeyPress={(e) => e.key === 'Enter' && handleChatSubmit()}
+                      className="flex-1 border-0 bg-transparent focus:ring-0 text-base placeholder:text-muted-foreground/70"
+                    />
+                    <Button 
+                      onClick={handleChatSubmit} 
+                      disabled={!chatInput.trim()}
+                      className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white transition-all duration-300 shadow-lg disabled:opacity-50"
                     >
-                      {agentConfig.riskLevel.toUpperCase()}
-                    </Badge>
-                  </div>
-
-                  <div>
-                    <Label className="text-sm text-muted-foreground">Venues</Label>
-                    <div className="flex flex-wrap gap-1 mt-1">
-                      {agentConfig.venues.map(venueId => {
-                        const venue = venues.find(v => v.id === venueId);
-                        return (
-                          <Badge key={venueId} variant="outline" className="text-xs">
-                            {venue?.name}
-                          </Badge>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  <div className="pt-4 border-t border-border/50">
-                    <Button className="w-full">
-                      <Target className="h-4 w-4" />
-                      Deploy Agent
+                      <Zap className="h-5 w-5" />
                     </Button>
                   </div>
                 </div>
-              ) : (
-                <div className="text-center py-12 text-muted-foreground">
-                  <Bot className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                  <p>Start chatting to configure your agent</p>
+              </Card>
+            </div>
+
+            {/* Enhanced Live Preview */}
+            <div className="relative">
+              <div className="absolute -inset-1 bg-gradient-to-r from-accent/20 via-primary/20 to-accent/20 rounded-2xl blur opacity-30" />
+              <Card className="relative bg-background/80 backdrop-blur-xl border border-border/30 p-8 rounded-2xl shadow-2xl">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-r from-accent to-primary rounded-lg blur opacity-50" />
+                    <Settings className="relative h-6 w-6 text-accent" />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold">Live Agent Preview</h2>
+                    <p className="text-sm text-muted-foreground">Real-time configuration</p>
+                  </div>
                 </div>
-              )}
-            </Card>
+
+                {agentConfig.name ? (
+                  <div className="space-y-6">
+                    <div className="relative overflow-hidden bg-gradient-to-r from-primary/5 via-accent/5 to-primary/5 rounded-xl p-6 border border-border/30">
+                      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-primary/20 to-accent/20 rounded-bl-full" />
+                      <div className="relative">
+                        <Label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Agent Identity</Label>
+                        <h3 className="text-2xl font-bold mt-1 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                          {agentConfig.name}
+                        </h3>
+                        <p className="text-sm text-muted-foreground mt-2">{agentConfig.description}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 gap-4">
+                      <div className="bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl p-4">
+                        <Label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Strategy</Label>
+                        <div className="mt-2">
+                          <Badge className="bg-gradient-to-r from-primary to-accent text-white border-0 shadow-lg">
+                            {strategies.find(s => s.id === agentConfig.strategy)?.name}
+                          </Badge>
+                        </div>
+                      </div>
+
+                      <div className="bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl p-4">
+                        <Label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Risk Level</Label>
+                        <div className="mt-2">
+                          <Badge 
+                            className={`border-0 shadow-lg ${
+                              agentConfig.riskLevel === 'low' ? 'bg-gradient-to-r from-green-500 to-green-600 text-white' : 
+                              agentConfig.riskLevel === 'medium' ? 'bg-gradient-to-r from-yellow-500 to-orange-500 text-white' : 
+                              'bg-gradient-to-r from-red-500 to-red-600 text-white'
+                            }`}
+                          >
+                            {agentConfig.riskLevel.toUpperCase()} RISK
+                          </Badge>
+                        </div>
+                      </div>
+
+                      <div className="bg-background/50 backdrop-blur-sm border border-border/30 rounded-xl p-4">
+                        <Label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Trading Venues</Label>
+                        <div className="flex flex-wrap gap-2 mt-2">
+                          {agentConfig.venues.map(venueId => {
+                            const venue = venues.find(v => v.id === venueId);
+                            return (
+                              <Badge key={venueId} variant="outline" className="text-xs bg-background/50 border-border/50">
+                                {venue?.name}
+                              </Badge>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="relative mt-8">
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/10 rounded-xl blur" />
+                      <Button className="relative w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white py-4 text-base font-semibold shadow-2xl transition-all duration-300 transform hover:scale-[1.02]">
+                        <Target className="h-5 w-5 mr-2" />
+                        Deploy Agent to Production
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] hover:translate-x-[100%] transition-transform duration-1000" />
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center py-16">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full blur-xl" />
+                      <div className="relative w-24 h-24 mx-auto mb-6 bg-gradient-to-r from-primary/20 to-accent/20 rounded-full flex items-center justify-center">
+                        <Bot className="h-12 w-12 text-muted-foreground/50" />
+                      </div>
+                    </div>
+                    <h3 className="text-lg font-semibold text-muted-foreground mb-2">Waiting for Configuration</h3>
+                    <p className="text-sm text-muted-foreground/70">Start describing your strategy to see the magic happen</p>
+                  </div>
+                )}
+              </Card>
+            </div>
           </div>
         ) : (
           /* Advanced Editor Mode */
