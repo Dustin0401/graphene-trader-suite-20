@@ -19,9 +19,7 @@ import {
   AreaChart
 } from "recharts";
 
-interface AnalyticsPageProps {
-  onBack: () => void;
-}
+interface AnalyticsPageProps {}
 
 const tradeCountData = [
   { date: "14Aug25", total: 800 },
@@ -75,21 +73,13 @@ const pieData = [
   { name: "Forward", value: 20, color: "hsl(var(--chart-3))" },
 ];
 
-const AnalyticsPage = ({ onBack }: AnalyticsPageProps) => {
+const AnalyticsPage = ({}: AnalyticsPageProps = {}) => {
   return (
     <div className="min-h-screen bg-background text-foreground p-6">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Button 
-              variant="ghost" 
-              onClick={onBack}
-              className="text-primary hover:text-primary/80"
-            >
-              <ArrowLeft className="w-5 h-5 mr-2" />
-              Back to Hub
-            </Button>
             <h1 className="text-3xl font-bold text-primary">Analytics</h1>
           </div>
         </div>

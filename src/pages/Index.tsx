@@ -8,6 +8,7 @@ import AnalyticsPage from "@/pages/AnalyticsPage";
 import TradingPage from "@/pages/TradingPage";
 import PricingPage from "@/pages/PricingPage";
 import DashboardPage from "@/pages/DashboardPage";
+import Navigation from "@/components/Navigation";
 
 type AppState = "homepage" | "connect" | "hub" | "builder" | "staking" | "analytics" | "trading" | "pricing" | "dashboard";
 
@@ -34,6 +35,10 @@ const Index = () => {
 
   const handleBackToHub = () => {
     setAppState("hub");
+  };
+
+  const handleNavigate = (page: AppState) => {
+    setAppState(page);
   };
 
   const handleExploreAgents = () => {
@@ -76,27 +81,81 @@ const Index = () => {
   }
 
   if (appState === "builder") {
-    return <AgentBuilder onBack={handleBackToHub} />;
+    return (
+      <div>
+        <Navigation 
+          currentPage="builder"
+          onNavigate={handleNavigate}
+          connectedWallet={connectedWallet}
+        />
+        <AgentBuilder onBack={handleBackToHub} />
+      </div>
+    );
   }
 
   if (appState === "staking") {
-    return <StakingPage onBack={handleBackToHub} />;
+    return (
+      <div>
+        <Navigation 
+          currentPage="staking"
+          onNavigate={handleNavigate}
+          connectedWallet={connectedWallet}
+        />
+        <StakingPage />
+      </div>
+    );
   }
 
   if (appState === "analytics") {
-    return <AnalyticsPage onBack={handleBackToHub} />;
+    return (
+      <div>
+        <Navigation 
+          currentPage="analytics"
+          onNavigate={handleNavigate}
+          connectedWallet={connectedWallet}
+        />
+        <AnalyticsPage />
+      </div>
+    );
   }
 
   if (appState === "trading") {
-    return <TradingPage onBack={handleBackToHub} />;
+    return (
+      <div>
+        <Navigation 
+          currentPage="trading"
+          onNavigate={handleNavigate}
+          connectedWallet={connectedWallet}
+        />
+        <TradingPage />
+      </div>
+    );
   }
 
   if (appState === "pricing") {
-    return <PricingPage onBack={handleBackToHub} />;
+    return (
+      <div>
+        <Navigation 
+          currentPage="pricing"
+          onNavigate={handleNavigate}
+          connectedWallet={connectedWallet}
+        />
+        <PricingPage />
+      </div>
+    );
   }
 
   if (appState === "dashboard") {
-    return <DashboardPage onBack={handleBackToHub} />;
+    return (
+      <div>
+        <Navigation 
+          currentPage="dashboard"
+          onNavigate={handleNavigate}
+          connectedWallet={connectedWallet}
+        />
+        <DashboardPage />
+      </div>
+    );
   }
 
   return (

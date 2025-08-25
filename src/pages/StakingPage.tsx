@@ -21,9 +21,7 @@ import {
 } from "lucide-react";
 import { LineChart, Line, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 
-interface StakingPageProps {
-  onBack: () => void;
-}
+interface StakingPageProps {}
 
 // Mock staking data
 const stakingPools = [
@@ -81,7 +79,7 @@ const rewardsData = [
   { time: '10', rewards: 135 }
 ];
 
-export default function StakingPage({ onBack }: StakingPageProps) {
+export default function StakingPage({}: StakingPageProps = {}) {
   const [selectedPool, setSelectedPool] = useState<string | null>(null);
   const [stakeAmount, setStakeAmount] = useState("");
   const [activeTab, setActiveTab] = useState<"stake" | "unstake">("stake");
@@ -98,40 +96,6 @@ export default function StakingPage({ onBack }: StakingPageProps) {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation Header */}
-      <nav className="border-b border-border bg-card/50">
-        <div className="max-w-7xl mx-auto px-6 py-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-8">
-              <div className="flex items-center space-x-2">
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  onClick={onBack}
-                  className="mr-2"
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                </Button>
-                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                  <Bot className="h-5 w-5 text-primary-foreground" />
-                </div>
-                <span className="text-foreground font-semibold">STRATOS</span>
-              </div>
-              <div className="flex items-center space-x-6 text-sm">
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer">Trading</span>
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer" onClick={() => window.history.back()}>Pricing</span>
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer">Dashboard</span>
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer">Analytics</span>
-                <span className="text-primary font-medium cursor-pointer">Staking</span>
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer">AI Agents</span>
-              </div>
-            </div>
-            <div className="flex items-center space-x-4">
-              <div className="w-8 h-8 rounded-full bg-muted"></div>
-            </div>
-          </div>
-        </div>
-      </nav>
 
       <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Header Section */}

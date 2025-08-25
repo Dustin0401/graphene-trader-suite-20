@@ -6,9 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Bot, ChevronLeft } from "lucide-react";
 import { useState } from "react";
 
-interface PricingPageProps {
-  onBack: () => void;
-}
+interface PricingPageProps {}
 
 // Mock data for options pricing
 const optionsData = {
@@ -72,7 +70,7 @@ const forwardsData = [
   { expiry: "26Sep25", bid: 4310.4, ask: 4336.7, lastPrice: 4323.55 },
 ];
 
-const PricingPage = ({ onBack }: PricingPageProps) => {
+const PricingPage = ({}: PricingPageProps = {}) => {
   const [selectedExpiry, setSelectedExpiry] = useState("28Mar25");
 
   const formatNumber = (num: number) => {
@@ -85,30 +83,11 @@ const PricingPage = ({ onBack }: PricingPageProps) => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="bg-card border-b border-border">
+
+      {/* Top Info Bar */}
+      <div className="bg-card border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-4">
-              <Button variant="ghost" size="sm" onClick={onBack} className="text-muted-foreground hover:text-foreground">
-                <ChevronLeft className="h-4 w-4 mr-1" />
-                Back
-              </Button>
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                  <Bot className="h-5 w-5 text-primary-foreground" />
-                </div>
-                <span className="text-foreground font-semibold">STRATOS</span>
-              </div>
-              <div className="flex items-center space-x-6 text-sm">
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer">Trading</span>
-                <span className="text-primary font-medium cursor-pointer">Pricing</span>
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer">Dashboard</span>
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer">Analytics</span>
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer">Staking</span>
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer">AI Agents</span>
-              </div>
-            </div>
+          <div className="flex items-center justify-end h-12">
             <div className="flex items-center space-x-4">
               <Badge variant="outline" className="text-success border-success/25">
                 ETH: $3,456.78
@@ -119,7 +98,7 @@ const PricingPage = ({ onBack }: PricingPageProps) => {
             </div>
           </div>
         </div>
-      </header>
+      </div>
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">

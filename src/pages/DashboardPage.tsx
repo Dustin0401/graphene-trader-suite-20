@@ -6,11 +6,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ChevronDown, ArrowLeftRight, Wallet, Clock, Target, TrendingUp } from "lucide-react";
 
-interface DashboardPageProps {
-  onBack: () => void;
-}
+interface DashboardPageProps {}
 
-const DashboardPage: React.FC<DashboardPageProps> = ({ onBack }) => {
+const DashboardPage: React.FC<DashboardPageProps> = ({} = {}) => {
   const collateralAssets = [
     {
       symbol: "WETH",
@@ -46,40 +44,9 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onBack }) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/10">
-      {/* Navigation Header */}
-      <div className="border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-8">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-sm">S</span>
-                </div>
-                <span className="text-foreground font-semibold">STRATOS</span>
-              </div>
-              <div className="flex items-center space-x-6 text-sm">
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer">Trading</span>
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer">Pricing</span>
-                <span className="text-primary font-medium cursor-pointer">Dashboard</span>
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer">Analytics</span>
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer">Staking</span>
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer" onClick={onBack}>AI Agents</span>
-              </div>
-            </div>
-            <div className="flex items-center space-x-4">
-              <div className="text-sm text-muted-foreground">Available Balance</div>
-              <div className="flex items-center space-x-2">
-                <Badge variant="outline" className="text-primary">🔵 USDC -</Badge>
-                <Badge variant="outline" className="text-primary">💎 WETH -</Badge>
-                <Badge variant="outline" className="text-primary">⬧ ETH -</Badge>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Asset Selection Section */}
-      <div className="container mx-auto px-6 py-6">
+      <div className="container mx-auto px-6 py-6 mt-6">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-2">

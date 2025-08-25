@@ -21,9 +21,7 @@ import {
 } from "lucide-react";
 import { LineChart, Line, ResponsiveContainer, XAxis, YAxis, Area, AreaChart } from 'recharts';
 
-interface TradingPageProps {
-  onBack: () => void;
-}
+interface TradingPageProps {}
 
 // Mock data for the P&L chart
 const mockPnLData = [
@@ -40,7 +38,7 @@ const mockPnLData = [
   { x: 100, y: 300 }
 ];
 
-export default function TradingPage({ onBack }: TradingPageProps) {
+export default function TradingPage({}: TradingPageProps = {}) {
   const [selectedStrategy, setSelectedStrategy] = useState("Linear Combinations");
   const [selectedAsset, setSelectedAsset] = useState("ETH");
   const [nextAuction, setNextAuction] = useState("00 Min 18 Secs");
@@ -49,40 +47,6 @@ export default function TradingPage({ onBack }: TradingPageProps) {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation Header */}
-      <nav className="border-b border-border bg-card/50">
-        <div className="max-w-7xl mx-auto px-6 py-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-8">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                  <Bot className="h-5 w-5 text-primary-foreground" />
-                </div>
-                <span className="text-foreground font-semibold">STRATOS</span>
-              </div>
-              <div className="flex items-center space-x-6 text-sm">
-                <span className="text-primary font-medium cursor-pointer">Trading</span>
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer" onClick={() => window.history.back()}>Pricing</span>
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer">Dashboard</span>
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer">Analytics</span>
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer">Staking</span>
-                <span className="text-muted-foreground hover:text-foreground cursor-pointer" onClick={onBack}>AI Agents</span>
-              </div>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Button onClick={onBack} variant="outline" size="sm">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back
-              </Button>
-              <div className="flex items-center space-x-2">
-                <Badge variant="outline" className="bg-primary/10 text-primary">USDC</Badge>
-                <Badge variant="outline" className="bg-secondary/10 text-secondary">WETH</Badge>
-              </div>
-              <div className="w-8 h-8 rounded-full bg-muted"></div>
-            </div>
-          </div>
-        </div>
-      </nav>
 
       <div className="max-w-7xl mx-auto px-6 py-6">
         <div className="grid grid-cols-12 gap-6">
