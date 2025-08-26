@@ -203,7 +203,7 @@ export default function AgentBuilder({ onBack }: AgentBuilderProps) {
   };
 
   return (
-    <div className="min-h-screen cosmic-bg">
+    <div className="min-h-screen bg-background">
       {/* Enhanced Header */}
       <header className="glass-intense border-b border-border/50 px-6 py-4 sticky top-0 z-50">
         <div className="flex items-center justify-between">
