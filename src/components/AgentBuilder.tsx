@@ -501,7 +501,6 @@ export default function AgentBuilder({ onBack }: AgentBuilderProps) {
                 <TabsTrigger value="deploy" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">Deploy</TabsTrigger>
               </TabsList>
 
-              {/* ... keep existing tab content but enhance with new classes ... */}
               <TabsContent value="identity" className="mt-6 space-y-4 animate-fade-in-up">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
@@ -514,10 +513,12 @@ export default function AgentBuilder({ onBack }: AgentBuilderProps) {
                       <SelectTrigger className="input-enhanced">
                         <SelectValue placeholder="Select icon" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="bg-card border border-border z-50">
                         <SelectItem value="bot">🤖 Bot</SelectItem>
                         <SelectItem value="lightning">⚡ Lightning</SelectItem>
                         <SelectItem value="target">🎯 Target</SelectItem>
+                        <SelectItem value="shield">🛡️ Shield</SelectItem>
+                        <SelectItem value="rocket">🚀 Rocket</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -533,7 +534,457 @@ export default function AgentBuilder({ onBack }: AgentBuilderProps) {
                 </div>
               </TabsContent>
 
-              {/* Similar enhancements for other tabs... */}
+              <TabsContent value="strategy" className="mt-6 space-y-6 animate-fade-in-up">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold flex items-center gap-2">
+                      <TrendingUp className="h-5 w-5 text-primary" />
+                      Strategy Configuration
+                    </h3>
+                    
+                    <div>
+                      <Label htmlFor="strategy-type">Strategy Type</Label>
+                      <Select>
+                        <SelectTrigger className="input-enhanced">
+                          <SelectValue placeholder="Select strategy" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-card border border-border z-50">
+                          <SelectItem value="delta-neutral">Delta-Neutral Arbitrage</SelectItem>
+                          <SelectItem value="momentum">Momentum Trading</SelectItem>
+                          <SelectItem value="mean-reversion">Mean Reversion</SelectItem>
+                          <SelectItem value="options-wheel">Options Wheel</SelectItem>
+                          <SelectItem value="grid">Grid Trading</SelectItem>
+                          <SelectItem value="dispersion">Dispersion Trading</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="asset-pairs">Asset Pairs</Label>
+                      <Textarea 
+                        id="asset-pairs" 
+                        placeholder="ETH/USDC, BTC/USDT, WBTC/ETH..."
+                        rows={3}
+                        className="input-enhanced"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="timeframe">Timeframe</Label>
+                        <Select>
+                          <SelectTrigger className="input-enhanced">
+                            <SelectValue placeholder="Select timeframe" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-card border border-border z-50">
+                            <SelectItem value="1m">1 Minute</SelectItem>
+                            <SelectItem value="5m">5 Minutes</SelectItem>
+                            <SelectItem value="15m">15 Minutes</SelectItem>
+                            <SelectItem value="1h">1 Hour</SelectItem>
+                            <SelectItem value="4h">4 Hours</SelectItem>
+                            <SelectItem value="1d">1 Day</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <Label htmlFor="frequency">Trading Frequency</Label>
+                        <Select>
+                          <SelectTrigger className="input-enhanced">
+                            <SelectValue placeholder="Select frequency" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-card border border-border z-50">
+                            <SelectItem value="high">High (100+ trades/day)</SelectItem>
+                            <SelectItem value="medium">Medium (10-100 trades/day)</SelectItem>
+                            <SelectItem value="low">Low (1-10 trades/day)</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold flex items-center gap-2">
+                      <Settings className="h-5 w-5 text-primary" />
+                      Strategy Parameters
+                    </h3>
+                    
+                    <div className="glass-card p-4 space-y-4">
+                      <div>
+                        <Label htmlFor="entry-threshold">Entry Threshold (%)</Label>
+                        <Input 
+                          id="entry-threshold" 
+                          type="number" 
+                          placeholder="0.5" 
+                          className="input-enhanced" 
+                        />
+                      </div>
+                      
+                      <div>
+                        <Label htmlFor="exit-threshold">Exit Threshold (%)</Label>
+                        <Input 
+                          id="exit-threshold" 
+                          type="number" 
+                          placeholder="1.0" 
+                          className="input-enhanced" 
+                        />
+                      </div>
+                      
+                      <div>
+                        <Label htmlFor="rebalance-interval">Rebalance Interval (hours)</Label>
+                        <Input 
+                          id="rebalance-interval" 
+                          type="number" 
+                          placeholder="24" 
+                          className="input-enhanced" 
+                        />
+                      </div>
+                      
+                      <div>
+                        <Label htmlFor="slippage-tolerance">Slippage Tolerance (%)</Label>
+                        <Input 
+                          id="slippage-tolerance" 
+                          type="number" 
+                          placeholder="0.1" 
+                          className="input-enhanced" 
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="risk" className="mt-6 space-y-6 animate-fade-in-up">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold flex items-center gap-2">
+                      <Shield className="h-5 w-5 text-primary" />
+                      Risk Management
+                    </h3>
+                    
+                    <div>
+                      <Label htmlFor="risk-level">Risk Level</Label>
+                      <Select>
+                        <SelectTrigger className="input-enhanced">
+                          <SelectValue placeholder="Select risk level" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-card border border-border z-50">
+                          <SelectItem value="conservative">Conservative (Low Risk)</SelectItem>
+                          <SelectItem value="moderate">Moderate (Medium Risk)</SelectItem>
+                          <SelectItem value="aggressive">Aggressive (High Risk)</SelectItem>
+                          <SelectItem value="custom">Custom Configuration</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="max-position">Max Position Size (%)</Label>
+                        <Input 
+                          id="max-position" 
+                          type="number" 
+                          placeholder="10" 
+                          className="input-enhanced" 
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="max-drawdown">Max Drawdown (%)</Label>
+                        <Input 
+                          id="max-drawdown" 
+                          type="number" 
+                          placeholder="5" 
+                          className="input-enhanced" 
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="stop-loss">Stop Loss (%)</Label>
+                        <Input 
+                          id="stop-loss" 
+                          type="number" 
+                          placeholder="2" 
+                          className="input-enhanced" 
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="take-profit">Take Profit (%)</Label>
+                        <Input 
+                          id="take-profit" 
+                          type="number" 
+                          placeholder="5" 
+                          className="input-enhanced" 
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold flex items-center gap-2">
+                      <Zap className="h-5 w-5 text-primary" />
+                      Advanced Risk Controls
+                    </h3>
+                    
+                    <div className="glass-card p-4 space-y-4">
+                      <div>
+                        <Label htmlFor="correlation-limit">Correlation Limit</Label>
+                        <Input 
+                          id="correlation-limit" 
+                          type="number" 
+                          placeholder="0.7" 
+                          step="0.1"
+                          className="input-enhanced" 
+                        />
+                      </div>
+                      
+                      <div>
+                        <Label htmlFor="var-limit">VaR Limit (24h)</Label>
+                        <Input 
+                          id="var-limit" 
+                          type="number" 
+                          placeholder="1000" 
+                          className="input-enhanced" 
+                        />
+                      </div>
+                      
+                      <div>
+                        <Label htmlFor="leverage">Max Leverage</Label>
+                        <Select>
+                          <SelectTrigger className="input-enhanced">
+                            <SelectValue placeholder="Select leverage" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-card border border-border z-50">
+                            <SelectItem value="1">1x (No Leverage)</SelectItem>
+                            <SelectItem value="2">2x</SelectItem>
+                            <SelectItem value="3">3x</SelectItem>
+                            <SelectItem value="5">5x</SelectItem>
+                            <SelectItem value="10">10x</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      
+                      <div className="flex items-center space-x-2">
+                        <input type="checkbox" id="circuit-breaker" className="rounded" />
+                        <Label htmlFor="circuit-breaker">Enable Circuit Breaker</Label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="execution" className="mt-6 space-y-6 animate-fade-in-up">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold flex items-center gap-2">
+                      <Cpu className="h-5 w-5 text-primary" />
+                      Execution Settings
+                    </h3>
+                    
+                    <div>
+                      <Label htmlFor="execution-venues">Trading Venues</Label>
+                      <div className="grid grid-cols-2 gap-2 mt-2">
+                        {venues.map((venue) => (
+                          <div key={venue.id} className="flex items-center space-x-2 glass-card p-3 rounded-lg">
+                            <input type="checkbox" id={venue.id} className="rounded" />
+                            <Label htmlFor={venue.id} className="flex items-center gap-2 text-sm">
+                              <span>{venue.icon}</span>
+                              {venue.name}
+                            </Label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="order-type">Default Order Type</Label>
+                        <Select>
+                          <SelectTrigger className="input-enhanced">
+                            <SelectValue placeholder="Select order type" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-card border border-border z-50">
+                            <SelectItem value="market">Market Order</SelectItem>
+                            <SelectItem value="limit">Limit Order</SelectItem>
+                            <SelectItem value="stop">Stop Order</SelectItem>
+                            <SelectItem value="stop-limit">Stop-Limit Order</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <Label htmlFor="execution-delay">Execution Delay (ms)</Label>
+                        <Input 
+                          id="execution-delay" 
+                          type="number" 
+                          placeholder="100" 
+                          className="input-enhanced" 
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold flex items-center gap-2">
+                      <Target className="h-5 w-5 text-primary" />
+                      Gas & Optimization
+                    </h3>
+                    
+                    <div className="glass-card p-4 space-y-4">
+                      <div>
+                        <Label htmlFor="gas-price">Gas Price Strategy</Label>
+                        <Select>
+                          <SelectTrigger className="input-enhanced">
+                            <SelectValue placeholder="Select strategy" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-card border border-border z-50">
+                            <SelectItem value="fast">Fast (High Priority)</SelectItem>
+                            <SelectItem value="standard">Standard</SelectItem>
+                            <SelectItem value="slow">Slow (Economic)</SelectItem>
+                            <SelectItem value="custom">Custom Gas Price</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      
+                      <div>
+                        <Label htmlFor="max-gas">Max Gas Price (gwei)</Label>
+                        <Input 
+                          id="max-gas" 
+                          type="number" 
+                          placeholder="50" 
+                          className="input-enhanced" 
+                        />
+                      </div>
+                      
+                      <div>
+                        <Label htmlFor="mev-protection">MEV Protection</Label>
+                        <Select>
+                          <SelectTrigger className="input-enhanced">
+                            <SelectValue placeholder="Select protection level" />
+                          </SelectTrigger>
+                          <SelectContent className="bg-card border border-border z-50">
+                            <SelectItem value="none">None</SelectItem>
+                            <SelectItem value="basic">Basic</SelectItem>
+                            <SelectItem value="advanced">Advanced</SelectItem>
+                            <SelectItem value="flashbots">Flashbots</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      
+                      <div className="flex items-center space-x-2">
+                        <input type="checkbox" id="batch-orders" className="rounded" />
+                        <Label htmlFor="batch-orders">Enable Order Batching</Label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
+
+              <TabsContent value="backtest" className="mt-6 space-y-6 animate-fade-in-up">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold flex items-center gap-2">
+                      <BarChart3 className="h-5 w-5 text-primary" />
+                      Backtest Configuration
+                    </h3>
+                    
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="start-date">Start Date</Label>
+                        <Input 
+                          id="start-date" 
+                          type="date" 
+                          className="input-enhanced" 
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="end-date">End Date</Label>
+                        <Input 
+                          id="end-date" 
+                          type="date" 
+                          className="input-enhanced" 
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="initial-capital">Initial Capital (USD)</Label>
+                      <Input 
+                        id="initial-capital" 
+                        type="number" 
+                        placeholder="100000" 
+                        className="input-enhanced" 
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="data-source">Data Source</Label>
+                      <Select>
+                        <SelectTrigger className="input-enhanced">
+                          <SelectValue placeholder="Select data source" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-card border border-border z-50">
+                          <SelectItem value="coinbase">Coinbase Pro</SelectItem>
+                          <SelectItem value="binance">Binance</SelectItem>
+                          <SelectItem value="uniswap">Uniswap V3</SelectItem>
+                          <SelectItem value="dydx">dYdX</SelectItem>
+                          <SelectItem value="synthetic">Synthetic Data</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <Button className="w-full btn-primary interactive-lift">
+                      <BarChart3 className="h-4 w-4 mr-2" />
+                      Run Backtest
+                    </Button>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold flex items-center gap-2">
+                      <Activity className="h-5 w-5 text-primary" />
+                      Performance Metrics
+                    </h3>
+                    
+                    <div className="glass-card p-4 space-y-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-primary">--</div>
+                          <div className="text-xs text-muted-foreground">Total Return</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-primary">--</div>
+                          <div className="text-xs text-muted-foreground">Sharpe Ratio</div>
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-muted-foreground">--</div>
+                          <div className="text-xs text-muted-foreground">Max Drawdown</div>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-muted-foreground">--</div>
+                          <div className="text-xs text-muted-foreground">Win Rate</div>
+                        </div>
+                      </div>
+                      
+                      <div className="text-center pt-4 border-t border-border/30">
+                        <div className="text-sm text-muted-foreground">
+                          Run a backtest to see performance metrics
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="glass-card p-4">
+                      <h4 className="font-semibold mb-3">Recent Backtests</h4>
+                      <div className="space-y-2">
+                        <div className="text-sm text-muted-foreground">
+                          No backtests run yet
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </TabsContent>
+
               <TabsContent value="deploy" className="mt-6 space-y-4 animate-fade-in-up">
                 <div className="text-center py-12">
                   <div className="space-y-6">
@@ -541,7 +992,7 @@ export default function AgentBuilder({ onBack }: AgentBuilderProps) {
                       <Target className="h-10 w-10 text-primary-foreground" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold mb-2 bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+                      <h3 className="text-2xl font-bold mb-2 text-primary">
                         Ready to Deploy
                       </h3>
                       <p className="text-muted-foreground max-w-md mx-auto">
