@@ -15,6 +15,7 @@ import {
   Calendar,
   DollarSign
 } from "lucide-react";
+import { Slider } from "@/components/ui/slider";
 import { LineChart, Line, ResponsiveContainer, XAxis, YAxis, AreaChart, Area } from 'recharts';
 
 interface Agent {
@@ -32,6 +33,12 @@ interface Agent {
   riskScore: number;
   isActive: boolean;
   chartData: Array<{ time: string; value: number }>;
+  bio?: string;
+  personalityTraits?: {
+    contrarian: number;
+    conservative: number;
+    introvert: number;
+  };
 }
 
 interface AgentDetailPageProps {
@@ -83,6 +90,30 @@ const journalEntries = [
     message: "New trade: Short 1.0 ETH Next Auction Forward, expiring 07JAN95. This adds to my portfolio's negative delta, exploiting market chaos for optimal gains."
   }
 ];
+
+// Generate unique agent profiles based on agent ID
+const getAgentProfile = (agent: Agent) => {
+  const profiles = {
+    "1": {
+      bio: "MagicTrend is an AI agent designed as a fierce options trader on Ithaca Protocol, focusing on Ethereum options. With a philosophy of relentless aggression, it identifies and capitalizes on mispriced contracts to achieve superior returns in volatile markets.",
+      personalityTraits: { contrarian: 75, conservative: 25, introvert: 40 }
+    },
+    "2": {
+      bio: "ArbitrageHunter is a sophisticated AI agent specializing in cross-market arbitrage opportunities. Using advanced statistical models, it identifies price discrepancies across multiple DEXs and executes lightning-fast trades to capture risk-free profits.",
+      personalityTraits: { contrarian: 45, conservative: 70, introvert: 80 }
+    },
+    "3": {
+      bio: "VolatilityMaster thrives in chaotic market conditions, employing complex volatility trading strategies. This AI agent excels at predicting and profiting from sudden market movements using sophisticated gamma and vega hedging techniques.",
+      personalityTraits: { contrarian: 90, conservative: 15, introvert: 30 }
+    },
+    default: {
+      bio: "This AI agent employs cutting-edge algorithms to navigate the complex world of DeFi trading. With a balanced approach to risk management and profit maximization, it adapts to changing market conditions with precision and intelligence.",
+      personalityTraits: { contrarian: 50, conservative: 50, introvert: 50 }
+    }
+  };
+  
+  return profiles[agent.id as keyof typeof profiles] || profiles.default;
+};
 
 export default function AgentDetailPage({ agent, onBack }: AgentDetailPageProps) {
   const [activeTab, setActiveTab] = useState("performance");
@@ -353,11 +384,94 @@ export default function AgentDetailPage({ agent, onBack }: AgentDetailPageProps)
                 </Card>
               </TabsContent>
 
-              <TabsContent value="about">
-                <Card className="bg-slate-800 border-slate-700 p-6">
-                  <h3 className="text-white font-semibold mb-4">About {agent.name}</h3>
-                  <p className="text-slate-300">{agent.description}</p>
-                </Card>
+              <TabsContent value="about" className="space-y-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {/* Bio Section */}
+                  <Card className="bg-background border-slate-700/30 p-6 shadow-lg">
+                    <h3 className="text-white font-semibold mb-4 text-lg">Bio</h3>
+                    <p className="text-slate-300 leading-relaxed text-sm">
+                      {getAgentProfile(agent).bio}
+                    </p>
+                    <div className="mt-6 pt-4 border-t border-slate-700/50">
+                      <div className="text-slate-400 text-xs font-medium mb-2">Agent Address</div>
+                      <div className="flex items-center space-x-2">
+                        <span className="text-white font-mono text-sm">0x2E66b...eEE87</span>
+                        <Button variant="ghost" size="sm" className="text-slate-400 p-1 h-6 w-6">
+                          <Copy className="w-3 h-3" />
+                        </Button>
+                      </div>
+                    </div>
+                  </Card>
+
+                  {/* Personality Section */}
+                  <Card className="bg-background border-slate-700/30 p-6 shadow-lg">
+                    <h3 className="text-white font-semibold mb-6 text-lg">Personality</h3>
+                    <div className="space-y-6">
+                      {/* Contrarian vs Momentum */}
+                      <div>
+                        <div className="flex justify-between items-center mb-3">
+                          <span className="text-sm text-slate-400">Contrarian</span>
+                          <span className="text-sm text-slate-400">Momentum</span>
+                        </div>
+                        <div className="relative">
+                          <Slider
+                            value={[getAgentProfile(agent).personalityTraits.contrarian]}
+                            max={100}
+                            step={1}
+                            className="w-full"
+                            disabled
+                          />
+                          <div className="flex justify-between mt-2">
+                            <div className="w-3 h-3 rounded-full bg-primary"></div>
+                            <div className="w-3 h-3 rounded-full bg-slate-600"></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Conservative vs Aggressive */}
+                      <div>
+                        <div className="flex justify-between items-center mb-3">
+                          <span className="text-sm text-slate-400">Conservative</span>
+                          <span className="text-sm text-slate-400">Aggressive</span>
+                        </div>
+                        <div className="relative">
+                          <Slider
+                            value={[getAgentProfile(agent).personalityTraits.conservative]}
+                            max={100}
+                            step={1}
+                            className="w-full"
+                            disabled
+                          />
+                          <div className="flex justify-between mt-2">
+                            <div className="w-3 h-3 rounded-full bg-primary"></div>
+                            <div className="w-3 h-3 rounded-full bg-slate-600"></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Introvert vs Extrovert */}
+                      <div>
+                        <div className="flex justify-between items-center mb-3">
+                          <span className="text-sm text-slate-400">Introvert</span>
+                          <span className="text-sm text-slate-400">Extrovert</span>
+                        </div>
+                        <div className="relative">
+                          <Slider
+                            value={[getAgentProfile(agent).personalityTraits.introvert]}
+                            max={100}
+                            step={1}
+                            className="w-full"
+                            disabled
+                          />
+                          <div className="flex justify-between mt-2">
+                            <div className="w-3 h-3 rounded-full bg-primary"></div>
+                            <div className="w-3 h-3 rounded-full bg-slate-600"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
+                </div>
               </TabsContent>
             </Tabs>
           </div>
