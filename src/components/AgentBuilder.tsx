@@ -219,7 +219,7 @@ export default function AgentBuilder({ onBack }: AgentBuilderProps) {
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
               </div>
               <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+                <h1 className="text-xl font-bold text-primary">
                   Agent Builder
                 </h1>
                 <p className="text-xs text-muted-foreground">AI-Powered Strategy Creation</p>
@@ -272,7 +272,7 @@ export default function AgentBuilder({ onBack }: AgentBuilderProps) {
               <div className="p-6 pb-4 border-b border-border/30">
                 <h2 className="text-xl font-semibold mb-2 flex items-center gap-2">
                   <Brain className="h-5 w-5 text-primary animate-pulse" />
-                  <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+                  <span className="text-primary">
                     AI Strategy Designer
                   </span>
                 </h2>
@@ -380,7 +380,7 @@ export default function AgentBuilder({ onBack }: AgentBuilderProps) {
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl font-semibold flex items-center gap-2">
                   <Settings className="h-5 w-5 text-primary" />
-                  <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+                  <span className="text-primary">
                     Agent Preview
                   </span>
                 </h2>
