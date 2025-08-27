@@ -1,7 +1,12 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Separator } from '@/components/ui/separator';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { useToast } from '@/hooks/use-toast';
 import { 
   Bot, 
   TrendingUp, 
@@ -19,15 +24,17 @@ import {
   Search,
   Filter,
   Grid3X3,
-  List
-} from "lucide-react";
+  List,
+  Wallet,
+  Info,
+  Minus
+} from 'lucide-react';
 import { LineChart, Line, ResponsiveContainer, XAxis, YAxis, AreaChart, Area } from 'recharts';
-import agentIcon from "@/assets/agent-icon.jpg";
-import AgentCard from "@/components/AgentCard";
-import AgentDetailedList from "@/components/AgentDetailedList";
-import AgentDetailPage from "@/components/AgentDetailPage";
-import { Input } from "@/components/ui/input";
-import ProfileAvatar from "@/components/ProfileAvatar";
+import agentIcon from '@/assets/agent-icon.jpg';
+import AgentCard from '@/components/AgentCard';
+import AgentDetailedList from '@/components/AgentDetailedList';
+import AgentDetailPage from '@/components/AgentDetailPage';
+import ProfileAvatar from '@/components/ProfileAvatar';
 
 interface AgentBuilderHubProps {
   walletConnected: string;
@@ -150,11 +157,49 @@ export default function AgentBuilderHub({
 }: AgentBuilderHubProps) {
   const [selectedAgent, setSelectedAgent] = useState<typeof agents[0] | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [isDepositModalOpen, setIsDepositModalOpen] = useState(false);
+  const [depositAmount, setDepositAmount] = useState("");
+  const [availableBalance] = useState(1250.45); // Mock available balance
+  const { toast } = useToast();
 
   const filteredAgents = agents.filter(agent => 
     agent.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     agent.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // Handle deposit functionality
+  const handleDeposit = () => {
+    if (!depositAmount || parseFloat(depositAmount) <= 0) {
+      toast({
+        title: "Invalid Amount",
+        description: "Please enter a valid deposit amount.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (parseFloat(depositAmount) > availableBalance) {
+      toast({
+        title: "Insufficient Balance",
+        description: "You don't have enough balance for this deposit.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Simulate deposit processing
+    toast({
+      title: "Deposit Successful",
+      description: `Successfully deposited $${depositAmount} USDC to Stratos Swarm`,
+    });
+    
+    setDepositAmount("");
+    setIsDepositModalOpen(false);
+  };
+
+  const handleMaxDeposit = () => {
+    setDepositAmount(availableBalance.toString());
+  };
 
   if (selectedAgent) {
     return <AgentDetailPage agent={selectedAgent} onBack={() => setSelectedAgent(null)} />;
@@ -217,17 +262,147 @@ export default function AgentBuilderHub({
               
               <div className="space-y-3">
                 <div>
-                  <label className="text-sm text-slate-400">Available Balance</label>
+                  <Label className="text-sm text-slate-400">Available Balance</Label>
                   <div className="flex items-center space-x-2 mt-1">
                     <div className="w-5 h-5 bg-blue-500 rounded-full"></div>
                     <span className="text-white">USDC</span>
                     <span className="text-slate-400">MAX</span>
                   </div>
-                  <div className="text-2xl font-bold text-white mt-1">0.00</div>
+                  <div className="text-2xl font-bold text-white mt-1">${availableBalance.toLocaleString()}</div>
                 </div>
-                <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
-                  Deposit
-                </Button>
+                
+                <Dialog open={isDepositModalOpen} onOpenChange={setIsDepositModalOpen}>
+                  <DialogTrigger asChild>
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-200 hover:scale-105 animate-fade-in">
+                      <Wallet className="w-4 h-4 mr-2" />
+                      Deposit
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-md bg-background border-slate-700/30 animate-scale-in">
+                    <DialogHeader>
+                      <DialogTitle className="text-white flex items-center gap-2">
+                        <Wallet className="w-5 h-5 text-primary" />
+                        Deposit to Stratos Swarm
+                      </DialogTitle>
+                      <DialogDescription className="text-slate-400">
+                        Deposit USDC to start trading with AI agents
+                      </DialogDescription>
+                    </DialogHeader>
+                    
+                    <div className="space-y-6 py-4">
+                      {/* Available Balance */}
+                      <div className="bg-slate-900/50 rounded-lg p-4 border border-slate-700/30">
+                        <div className="flex items-center justify-between mb-2">
+                          <Label className="text-sm text-slate-400">Available Balance</Label>
+                          <div className="flex items-center space-x-2">
+                            <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
+                            <span className="text-white text-sm font-medium">USDC</span>
+                          </div>
+                        </div>
+                        <div className="text-2xl font-bold text-white">
+                          ${availableBalance.toLocaleString()}
+                        </div>
+                      </div>
+
+                      {/* Deposit Amount */}
+                      <div className="space-y-3">
+                        <Label className="text-sm text-slate-400">Deposit Amount</Label>
+                        <div className="relative">
+                          <Input
+                            type="number"
+                            placeholder="0.00"
+                            value={depositAmount}
+                            onChange={(e) => setDepositAmount(e.target.value)}
+                            className="bg-background border-slate-700/30 text-white text-lg h-12 pr-16"
+                            step="0.01"
+                            min="0"
+                            max={availableBalance}
+                          />
+                          <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="sm"
+                              onClick={handleMaxDeposit}
+                              className="text-primary hover:text-primary/80 h-6 px-2 text-xs"
+                            >
+                              MAX
+                            </Button>
+                          </div>
+                        </div>
+                        
+                        {/* Quick Amount Buttons */}
+                        <div className="grid grid-cols-4 gap-2">
+                          {[100, 500, 1000, 2500].map((amount) => (
+                            <Button
+                              key={amount}
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              onClick={() => setDepositAmount(amount.toString())}
+                              className="border-slate-700/30 text-slate-300 hover:text-white hover:border-primary/50"
+                              disabled={amount > availableBalance}
+                            >
+                              ${amount}
+                            </Button>
+                          ))}
+                        </div>
+                      </div>
+
+                      <Separator className="bg-slate-700/30" />
+
+                      {/* Transaction Details */}
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="text-slate-400">Platform Fee</span>
+                          <span className="text-white">0.0%</span>
+                        </div>
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="text-slate-400">Network Fee</span>
+                          <span className="text-white">~$2.50</span>
+                        </div>
+                        <div className="flex items-center justify-between text-sm font-medium pt-2 border-t border-slate-700/30">
+                          <span className="text-white">You'll Receive</span>
+                          <span className="text-primary">
+                            ${depositAmount ? parseFloat(depositAmount).toLocaleString() : "0.00"} USDC
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Info Box */}
+                      <div className="bg-primary/10 border border-primary/20 rounded-lg p-3">
+                        <div className="flex items-start space-x-2">
+                          <Info className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                          <div className="text-xs text-primary">
+                            <p className="font-medium mb-1">Instant Access</p>
+                            <p className="text-primary/80">
+                              Your funds will be available immediately for AI trading strategies.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="flex space-x-3">
+                        <Button
+                          variant="outline"
+                          onClick={() => setIsDepositModalOpen(false)}
+                          className="flex-1 border-slate-700/30 text-slate-300 hover:text-white"
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          onClick={handleDeposit}
+                          disabled={!depositAmount || parseFloat(depositAmount) <= 0}
+                          className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground transition-all duration-200 hover:scale-105"
+                        >
+                          <Plus className="w-4 h-4 mr-2" />
+                          Confirm Deposit
+                        </Button>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
           </div>
@@ -307,7 +482,7 @@ export default function AgentBuilderHub({
             return (
               <div 
                 key={agent.id} 
-                className="bg-background rounded-lg p-4 border border-slate-700/30 hover:border-slate-600/50 cursor-pointer transition-all duration-200 shadow-lg hover:shadow-xl"
+                className="bg-background rounded-lg p-4 border border-slate-700/30 hover:border-slate-600/50 cursor-pointer transition-all duration-200 shadow-lg hover:shadow-xl animate-fade-in"
                 onClick={() => setSelectedAgent(agent)}
               >
                 <div className="grid grid-cols-12 gap-4 items-center">
