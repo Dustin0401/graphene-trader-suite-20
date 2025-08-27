@@ -96,19 +96,80 @@ const getAgentProfile = (agent: Agent) => {
   const profiles = {
     "1": {
       bio: "MagicTrend is an AI agent designed as a fierce options trader on Ithaca Protocol, focusing on Ethereum options. With a philosophy of relentless aggression, it identifies and capitalizes on mispriced contracts to achieve superior returns in volatile markets.",
-      personalityTraits: { contrarian: 75, conservative: 25, introvert: 40 }
+      personalityTraits: { 
+        contrarian: 75,        // More contrarian approach
+        momentum: 25,          // Less momentum following
+        conservative: 25,      // Less conservative
+        aggressive: 75,        // More aggressive
+        introvert: 40,         // Somewhat introverted
+        extrovert: 60          // More extroverted
+      }
     },
     "2": {
       bio: "ArbitrageHunter is a sophisticated AI agent specializing in cross-market arbitrage opportunities. Using advanced statistical models, it identifies price discrepancies across multiple DEXs and executes lightning-fast trades to capture risk-free profits.",
-      personalityTraits: { contrarian: 45, conservative: 70, introvert: 80 }
+      personalityTraits: { 
+        contrarian: 45,        // Moderately contrarian
+        momentum: 55,          // Slightly momentum following
+        conservative: 70,      // More conservative
+        aggressive: 30,        // Less aggressive
+        introvert: 80,         // Very introverted
+        extrovert: 20          // Less extroverted
+      }
     },
     "3": {
       bio: "VolatilityMaster thrives in chaotic market conditions, employing complex volatility trading strategies. This AI agent excels at predicting and profiting from sudden market movements using sophisticated gamma and vega hedging techniques.",
-      personalityTraits: { contrarian: 90, conservative: 15, introvert: 30 }
+      personalityTraits: { 
+        contrarian: 90,        // Highly contrarian
+        momentum: 10,          // Very low momentum following
+        conservative: 15,      // Very low conservative
+        aggressive: 85,        // Highly aggressive
+        introvert: 30,         // Less introverted
+        extrovert: 70          // More extroverted
+      }
+    },
+    "4": {
+      bio: "TrendFollower is a momentum-based AI agent that excels at identifying and riding market trends. It uses sophisticated technical analysis and machine learning to detect trend reversals and capitalize on sustained price movements.",
+      personalityTraits: { 
+        contrarian: 20,        // Low contrarian
+        momentum: 80,          // High momentum following
+        conservative: 60,      // Moderately conservative
+        aggressive: 40,        // Moderately aggressive
+        introvert: 50,         // Balanced
+        extrovert: 50          // Balanced
+      }
+    },
+    "5": {
+      bio: "RiskManager is a conservative AI agent focused on capital preservation while generating steady returns. It employs advanced risk management techniques and diversified strategies to minimize drawdowns.",
+      personalityTraits: { 
+        contrarian: 30,        // Low contrarian
+        momentum: 70,          // High momentum following
+        conservative: 85,      // Highly conservative
+        aggressive: 15,        // Low aggressive
+        introvert: 70,         // More introverted
+        extrovert: 30          // Less extroverted
+      }
+    },
+    "6": {
+      bio: "AlphaSeeker is an aggressive AI agent that hunts for alpha opportunities across all market conditions. It combines quantitative analysis with behavioral finance to identify and exploit market inefficiencies.",
+      personalityTraits: { 
+        contrarian: 85,        // Highly contrarian
+        momentum: 15,          // Low momentum following
+        conservative: 20,      // Low conservative
+        aggressive: 80,        // Highly aggressive
+        introvert: 25,         // Low introverted
+        extrovert: 75          // Highly extroverted
+      }
     },
     default: {
       bio: "This AI agent employs cutting-edge algorithms to navigate the complex world of DeFi trading. With a balanced approach to risk management and profit maximization, it adapts to changing market conditions with precision and intelligence.",
-      personalityTraits: { contrarian: 50, conservative: 50, introvert: 50 }
+      personalityTraits: { 
+        contrarian: 50,        // Balanced
+        momentum: 50,          // Balanced
+        conservative: 50,      // Balanced
+        aggressive: 50,        // Balanced
+        introvert: 50,         // Balanced
+        extrovert: 50          // Balanced
+      }
     }
   };
   
@@ -403,70 +464,85 @@ export default function AgentDetailPage({ agent, onBack }: AgentDetailPageProps)
                     </div>
                   </Card>
 
-                  {/* Personality Section */}
+                  {/* Agent Personality Section */}
                   <Card className="bg-background border-slate-700/30 p-6 shadow-lg">
-                    <h3 className="text-white font-semibold mb-6 text-lg">Personality</h3>
+                    <h3 className="text-white font-semibold mb-6 text-lg">Agent Personality</h3>
                     <div className="space-y-6">
                       {/* Contrarian vs Momentum */}
                       <div>
                         <div className="flex justify-between items-center mb-3">
-                          <span className="text-sm text-slate-400">Contrarian</span>
-                          <span className="text-sm text-slate-400">Momentum</span>
+                          <span className="text-sm font-medium text-slate-300">Contrarian</span>
+                          <span className="text-sm font-medium text-slate-300">Momentum</span>
                         </div>
-                        <div className="relative">
-                          <Slider
-                            value={[getAgentProfile(agent).personalityTraits.contrarian]}
-                            max={100}
-                            step={1}
-                            className="w-full"
-                            disabled
-                          />
-                          <div className="flex justify-between mt-2">
-                            <div className="w-3 h-3 rounded-full bg-primary"></div>
-                            <div className="w-3 h-3 rounded-full bg-slate-600"></div>
-                          </div>
+                        <div className="relative h-3 bg-slate-800 rounded-full overflow-hidden">
+                          {/* Background gradient */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-red-500/60 via-yellow-500/60 to-green-500/60"></div>
+                          {/* Progress indicator */}
+                          <div 
+                            className="absolute top-0 left-0 h-full bg-gradient-to-r from-red-500 to-green-500 rounded-full transition-all duration-300"
+                            style={{ width: `${getAgentProfile(agent).personalityTraits.momentum}%` }}
+                          ></div>
+                          {/* Position indicator */}
+                          <div 
+                            className="absolute top-1/2 transform -translate-y-1/2 w-4 h-4 bg-white rounded-full border-2 border-slate-700 shadow-lg"
+                            style={{ left: `calc(${getAgentProfile(agent).personalityTraits.momentum}% - 8px)` }}
+                          ></div>
+                        </div>
+                        <div className="flex justify-between mt-2 text-xs">
+                          <span className="text-red-400">{getAgentProfile(agent).personalityTraits.contrarian}%</span>
+                          <span className="text-green-400">{getAgentProfile(agent).personalityTraits.momentum}%</span>
                         </div>
                       </div>
 
                       {/* Conservative vs Aggressive */}
                       <div>
                         <div className="flex justify-between items-center mb-3">
-                          <span className="text-sm text-slate-400">Conservative</span>
-                          <span className="text-sm text-slate-400">Aggressive</span>
+                          <span className="text-sm font-medium text-slate-300">Conservative</span>
+                          <span className="text-sm font-medium text-slate-300">Aggressive</span>
                         </div>
-                        <div className="relative">
-                          <Slider
-                            value={[getAgentProfile(agent).personalityTraits.conservative]}
-                            max={100}
-                            step={1}
-                            className="w-full"
-                            disabled
-                          />
-                          <div className="flex justify-between mt-2">
-                            <div className="w-3 h-3 rounded-full bg-primary"></div>
-                            <div className="w-3 h-3 rounded-full bg-slate-600"></div>
-                          </div>
+                        <div className="relative h-3 bg-slate-800 rounded-full overflow-hidden">
+                          {/* Background gradient */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/60 via-purple-500/60 to-red-500/60"></div>
+                          {/* Progress indicator */}
+                          <div 
+                            className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 to-red-500 rounded-full transition-all duration-300"
+                            style={{ width: `${getAgentProfile(agent).personalityTraits.aggressive}%` }}
+                          ></div>
+                          {/* Position indicator */}
+                          <div 
+                            className="absolute top-1/2 transform -translate-y-1/2 w-4 h-4 bg-white rounded-full border-2 border-slate-700 shadow-lg"
+                            style={{ left: `calc(${getAgentProfile(agent).personalityTraits.aggressive}% - 8px)` }}
+                          ></div>
+                        </div>
+                        <div className="flex justify-between mt-2 text-xs">
+                          <span className="text-blue-400">{getAgentProfile(agent).personalityTraits.conservative}%</span>
+                          <span className="text-red-400">{getAgentProfile(agent).personalityTraits.aggressive}%</span>
                         </div>
                       </div>
 
                       {/* Introvert vs Extrovert */}
                       <div>
                         <div className="flex justify-between items-center mb-3">
-                          <span className="text-sm text-slate-400">Introvert</span>
-                          <span className="text-sm text-slate-400">Extrovert</span>
+                          <span className="text-sm font-medium text-slate-300">Introvert</span>
+                          <span className="text-sm font-medium text-slate-300">Extrovert</span>
                         </div>
-                        <div className="relative">
-                          <Slider
-                            value={[getAgentProfile(agent).personalityTraits.introvert]}
-                            max={100}
-                            step={1}
-                            className="w-full"
-                            disabled
-                          />
-                          <div className="flex justify-between mt-2">
-                            <div className="w-3 h-3 rounded-full bg-primary"></div>
-                            <div className="w-3 h-3 rounded-full bg-slate-600"></div>
-                          </div>
+                        <div className="relative h-3 bg-slate-800 rounded-full overflow-hidden">
+                          {/* Background gradient */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/60 via-cyan-500/60 to-orange-500/60"></div>
+                          {/* Progress indicator */}
+                          <div 
+                            className="absolute top-0 left-0 h-full bg-gradient-to-r from-indigo-500 to-orange-500 rounded-full transition-all duration-300"
+                            style={{ width: `${getAgentProfile(agent).personalityTraits.extrovert}%` }}
+                          ></div>
+                          {/* Position indicator */}
+                          <div 
+                            className="absolute top-1/2 transform -translate-y-1/2 w-4 h-4 bg-white rounded-full border-2 border-slate-700 shadow-lg"
+                            style={{ left: `calc(${getAgentProfile(agent).personalityTraits.extrovert}% - 8px)` }}
+                          ></div>
+                        </div>
+                        <div className="flex justify-between mt-2 text-xs">
+                          <span className="text-indigo-400">{getAgentProfile(agent).personalityTraits.introvert}%</span>
+                          <span className="text-orange-400">{getAgentProfile(agent).personalityTraits.extrovert}%</span>
                         </div>
                       </div>
                     </div>
