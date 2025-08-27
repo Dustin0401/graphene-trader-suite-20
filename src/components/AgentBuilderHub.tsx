@@ -360,58 +360,113 @@ export default function AgentBuilderHub({
 
                   {/* Agent Personality */}
                   <div className="col-span-3">
-                    <div className="text-slate-400 text-xs mb-2">Agent Personality</div>
+                    <div className="text-slate-400 text-xs mb-3">Agent Personality</div>
                     
-                    {/* Risk Bars */}
-                    <div className="grid grid-cols-4 gap-1 mb-3">
-                      {Array.from({ length: 20 }, (_, i) => (
-                        <div 
-                          key={i}
-                          className={`h-1.5 rounded-sm ${
-                            i < Math.floor(agent.riskScore / 5) ? 
-                              (agent.riskScore <= 30 ? 'bg-primary' :
-                               agent.riskScore <= 70 ? 'bg-yellow-500' : 'bg-red-500') : 
-                              'bg-slate-700'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    
-                    {/* Risk Categories */}
-                    <div className="space-y-1 text-xs">
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">Moderate</span>
-                        <div className="flex space-x-0.5">
-                          <div className="w-2 h-2 bg-primary rounded-full"></div>
-                          <div className="w-2 h-2 bg-primary rounded-full"></div>
-                          <div className="w-2 h-2 bg-primary rounded-full"></div>
-                          <div className="w-2 h-2 bg-slate-600 rounded-full"></div>
-                          <div className="w-2 h-2 bg-slate-600 rounded-full"></div>
+                    {/* Enhanced Personality Traits */}
+                    <div className="space-y-2">
+                      {/* Contrarian vs Momentum */}
+                      <div>
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="text-xs text-slate-400">Contrarian</span>
+                          <span className="text-xs text-slate-400">Momentum</span>
+                        </div>
+                        <div className="relative h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                          {/* Background gradient */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-red-500/40 via-yellow-500/40 to-green-500/40"></div>
+                          {/* Progress indicator based on agent personality */}
+                          <div 
+                            className="absolute top-0 left-0 h-full bg-gradient-to-r from-red-500 to-green-500 rounded-full"
+                            style={{ 
+                              width: `${
+                                agent.personality === "Conservative" ? "25%" :
+                                agent.personality === "Moderate" ? "50%" : "75%"
+                              }` 
+                            }}
+                          ></div>
+                          {/* Position indicator */}
+                          <div 
+                            className="absolute top-1/2 transform -translate-y-1/2 w-2.5 h-2.5 bg-white rounded-full border border-slate-700 shadow-sm"
+                            style={{ 
+                              left: `calc(${
+                                agent.personality === "Conservative" ? "25%" :
+                                agent.personality === "Moderate" ? "50%" : "75%"
+                              } - 5px)` 
+                            }}
+                          ></div>
                         </div>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">Leverage</span>
-                        <div className="flex space-x-0.5">
-                          <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                          <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                          <div className="w-2 h-2 bg-slate-600 rounded-full"></div>
-                          <div className="w-2 h-2 bg-slate-600 rounded-full"></div>
-                          <div className="w-2 h-2 bg-slate-600 rounded-full"></div>
+
+                      {/* Conservative vs Aggressive */}
+                      <div>
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="text-xs text-slate-400">Conservative</span>
+                          <span className="text-xs text-slate-400">Aggressive</span>
+                        </div>
+                        <div className="relative h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                          {/* Background gradient */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/40 via-purple-500/40 to-red-500/40"></div>
+                          {/* Progress indicator based on agent personality */}
+                          <div 
+                            className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 to-red-500 rounded-full"
+                            style={{ 
+                              width: `${
+                                agent.personality === "Conservative" ? "20%" :
+                                agent.personality === "Moderate" ? "55%" : "85%"
+                              }` 
+                            }}
+                          ></div>
+                          {/* Position indicator */}
+                          <div 
+                            className="absolute top-1/2 transform -translate-y-1/2 w-2.5 h-2.5 bg-white rounded-full border border-slate-700 shadow-sm"
+                            style={{ 
+                              left: `calc(${
+                                agent.personality === "Conservative" ? "20%" :
+                                agent.personality === "Moderate" ? "55%" : "85%"
+                              } - 5px)` 
+                            }}
+                          ></div>
                         </div>
                       </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">Liquidity</span>
-                        <div className="flex space-x-0.5">
-                          <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                          <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                          <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                          <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                          <div className="w-2 h-2 bg-slate-600 rounded-full"></div>
+
+                      {/* Introvert vs Extrovert */}
+                      <div>
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="text-xs text-slate-400">Introvert</span>
+                          <span className="text-xs text-slate-400">Extrovert</span>
+                        </div>
+                        <div className="relative h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                          {/* Background gradient */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/40 via-cyan-500/40 to-orange-500/40"></div>
+                          {/* Progress indicator based on agent personality */}
+                          <div 
+                            className="absolute top-0 left-0 h-full bg-gradient-to-r from-indigo-500 to-orange-500 rounded-full"
+                            style={{ 
+                              width: `${
+                                agent.personality === "Conservative" ? "35%" :
+                                agent.personality === "Moderate" ? "60%" : "80%"
+                              }` 
+                            }}
+                          ></div>
+                          {/* Position indicator */}
+                          <div 
+                            className="absolute top-1/2 transform -translate-y-1/2 w-2.5 h-2.5 bg-white rounded-full border border-slate-700 shadow-sm"
+                            style={{ 
+                              left: `calc(${
+                                agent.personality === "Conservative" ? "35%" :
+                                agent.personality === "Moderate" ? "60%" : "80%"
+                              } - 5px)` 
+                            }}
+                          ></div>
                         </div>
                       </div>
+
+                      {/* Efficiency indicator */}
                       <div className="flex justify-between items-center pt-1">
-                        <span className="text-slate-400">Efficiency</span>
-                        <span className="text-white text-xs">99%</span>
+                        <span className="text-slate-400 text-xs">Efficiency</span>
+                        <span className="text-white text-xs font-medium">
+                          {agent.personality === "Conservative" ? "94%" :
+                           agent.personality === "Moderate" ? "97%" : "99%"}
+                        </span>
                       </div>
                     </div>
                   </div>
