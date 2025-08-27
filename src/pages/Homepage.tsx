@@ -351,7 +351,7 @@ export default function Homepage({ onEnterApp, onWalletConnect, connectedWallet 
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 px-6 bg-accent">
+      <section className="py-16 px-6 bg-background">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -439,7 +439,7 @@ export default function Homepage({ onEnterApp, onWalletConnect, connectedWallet 
       </section>
 
       {/* Performance Comparison */}
-      <section className="py-20 px-6 bg-accent">
+      <section className="py-20 px-6 bg-background">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
@@ -588,7 +588,7 @@ export default function Homepage({ onEnterApp, onWalletConnect, connectedWallet 
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 px-6 bg-accent">
+      <section className="py-20 px-6 bg-background">
         <div className="max-w-7xl mx-auto">
           <div className="text-center space-y-4 mb-16">
             <Badge className="bg-primary/10 text-primary border-primary/20 px-4 py-2">
@@ -737,7 +737,7 @@ export default function Homepage({ onEnterApp, onWalletConnect, connectedWallet 
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border bg-accent py-12 px-6">
+      <footer className="border-t border-border bg-background py-12 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="space-y-4">
